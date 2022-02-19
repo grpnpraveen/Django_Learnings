@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import cars,carsfromdatabaser
+from django.contrib.auth.models import User, auth
+from django.contrib.auth import authenticate
 # Create your views here.
 def TravelloHome(request):
     staticpath="static/images/"
@@ -27,5 +29,8 @@ def TravelloHome(request):
     webcars=[car1,car2,car3]
     return render(request,"travellohome.html",{"cars":webcars,"dataloadtype":"classObject","fromclass":True,"frompostgres":False})
 def TravelloHomePostgres(request):
-    webcars=carsfromdatabaser.objects.all()
-    return render(request,"travellohome.html",{"cars":webcars,"dataloadtype":"postgres","fromclass":False,"frompostgres":True})
+    if(request.user.is_authenticated):
+        webcars=carsfromdatabaser.objects.all()
+        return render(request,"travellohome.html",{"cars":webcars,"dataloadtype":"postgres","fromclass":False,"frompostgres":True})
+    else:
+        return render(request,"Error.html")
