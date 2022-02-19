@@ -1,0 +1,15 @@
+{% extends "header.html" %}
+{% block content %}
+<form action="login" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="User name"> <br>
+    <input type="password" name="password" placeholder="password"> <br>
+    <input type="Submit">
+</form>
+
+<div>  
+    {% for msg in messages %}
+    <h3>{{msg}}</h3>
+    {% endfor %}
+</div>
+{% endblock %}

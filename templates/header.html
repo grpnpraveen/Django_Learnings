@@ -1,0 +1,21 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'styles/travellohome.css' %}">
+  </head>
+  <body>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="#">Dashboard</a> |
+        <a href="/accounts/register">register</a> |
+        {% if user.is_authenticated %}
+         <a href="/accounts/logout">Hello {{user.username}} Logout</a>
+        {% else %}
+          <a href="/accounts/login">Login</a>
+        {% endif %}
+      
+        </nav>
+        {% block content %}
+        {% endblock %}
+   </body>
+</html>
